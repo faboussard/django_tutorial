@@ -41,6 +41,32 @@ Other commands:
 12. add the model to the admin interface (in the app admin.py)
 
 
+## Django Template Language (DTL): ##
+
+Tags¶
+Tags provide arbitrary logic in the rendering process.
+
+This definition is deliberately vague. For example, a tag can output content, serve as a control structure e.g. an “if” statement or a “for” loop, grab content from a database, or even enable access to other template tags.
+
+Tags are surrounded by {% and %} like this:
+
+{% %} : Balises de contrôle (logique).
+{{ }} : Balises d'affichage des variables ou résultats.
+
+{% csrf_token %} template tag. This is used to prevent Cross Site Request Forgerie (in french: protection contre les requêtes intersites) attacks.
+
+## summary vmt model ##
+1. View: a function that handle the http request, interacts with the model and send a response http, usually rendered with a template
+
+2. model: a representation of a table in a database. it defines the database structure that we want to stock and manipulate
+
+3. template: a file that contains the html code that will be rendered by the view
+
+use the PRG (Post/Redirect/Get) pattern:
+use httpresponseRedirect to avoid the form to be sent twice if the user refresh the page after submitting the form (the browser will send the form again)
+
+
+
 todo:
 migration when mouting the docker
 make all dockers up

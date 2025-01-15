@@ -1,3 +1,62 @@
+HTTPS Protocol:
+
+API = Application Programming Interface
+REST API = A set of rules that developers follow when creating their API.
+REST stands for Representational State Transfer, which is an architectural style for networked hypermedia applications.
+RESTful API = An API that follows the rules of REST.
+HTTP is a stateless protocol, so each request from a client to a server must contain all the information needed by the server to understand the request, without any reference to previous requests.
+CRUD = Create, Read, Update, Delete.
+HTTP Process:
+The client sends a request to the server.
+The server sends a response to the client.
+A typical HTTP message:
+Start line (request line or status line) = The first line of the message.
+Headers = Key-value pairs that provide information about the message.
+Body = The data that is sent in the message.
+Request and Response Differences:
+Request:
+
+Start line: Method (POST, GET, PUT, DELETE), URL, HTTP version.
+Headers: Key-value pairs that provide information about the request.
+Example: Host, User-Agent, Accept, Accept-Language, Accept-Encoding, Connection, Cookie.
+Body: The data that is sent in the message.
+Response:
+
+Start line: HTTP version, status code, reason phrase.
+Headers: Key-value pairs that provide information about the response.
+Example: Server, Date, Content-Type, Content-Length, Connection.
+Body: The data that is sent in the message.
+The Navigator Encodes the Data in the Request, Depending on the Method:
+GET and DELETE: The data is encoded in the URL.
+POST and PUT: The data is encoded in the body of the request.
+Fetch API (Replacement of AJAX) in JavaScript
+The Fetch API allows making requests to a server from a web page and performing CRUD operations.
+
+Example (POST request with Fetch):
+
+javascript
+Copy code
+const formData = new FormData();  // Create a new FormData object
+formData.append('choice', '1');   // Add data to the form
+
+fetch('/polls/vote/', {
+    method: 'POST',  // Specify the HTTP method (POST in this case)
+    body: formData,  // Send the data in the body of the request
+    headers: {
+        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,  // For CSRF security (if Django)
+    }
+})
+.then(response => response.json())
+.then(data => {
+    console.log('Success:', data);  // Display the server response
+})
+.catch(error => {
+    console.error('Error:', error);  // Handle errors
+});
+
+On the Server-Side:
+The Ninja framework will serve the client requests by picking the correct view and returning the appropriate response.
+
 python packages:
 https://docs.python.org/3/tutorial/modules.html#tut-packages
 
@@ -55,6 +114,22 @@ Tags are surrounded by {% and %} like this:
 
 {% csrf_token %} template tag. This is used to prevent Cross Site Request Forgerie (in french: protection contre les requêtes intersites) attacks.
 
+pk : primary key (id) = the unique identifier of a model instance
+ex: in pk=reporter.pk, reporter is the model instance and pk is the primary key
+reporter = Reporter.objects.get(pk=reporter.pk) = get the reporter with the primary key reporter.pk
+
+expression query : a query that returns a value from the database
+F() = a class that allows to reference model field values directly in the database
+ex: from django.db.models import F
+Entry.objects.update(n_pingbacks=F('n_pingbacks') + 1) = increment the n_pingbacks field of all the entries by 1
+
+F() therefore can offer performance advantages by:
+
+getting the database, rather than Python, to do work
+
+reducing the number of queries some operations requir
+Another useful benefit of F() is that having the database - rather than Python - update a field’s value avoids a race condition, by using refresh_from_db().
+
 ## summary vmt model ##
 1. View: a function that handle the http request, interacts with the model and send a response http, usually rendered with a template
 
@@ -71,3 +146,6 @@ todo:
 migration when mouting the docker
 make all dockers up
 
+admin:
+login: admin
+password: password

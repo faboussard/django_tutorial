@@ -130,6 +130,25 @@ getting the database, rather than Python, to do work
 reducing the number of queries some operations requir
 Another useful benefit of F() is that having the database - rather than Python - update a field’s value avoids a race condition, by using refresh_from_db().
 
+get_queryset : a method that returns a queryset of objects that will be used to render the view
+
+foreignKey : a field that allows to create a relationship between two models
+
+## Python ## :
+
+Methods types:
+instance : a method that is called on an instance of a class. use of self as first argument. 
+class : a method that is called on a class. use of cls as first argument.
+static : a method that is called on a class but does not have access to the class or instance. no first argument.
+
+
+Type de méthode	Premier paramètre	Accès à l'objet	Quand l'utiliser
+Méthode d'instance	self	✅ Oui	Manipuler les attributs de l'objet
+Méthode de classe	cls	❌ Objet non, ✅ Classe	Travailler avec les attributs de classe
+Méthode statique	Aucun	❌ Non	Fonction indépendante, organisée dans la classe
+
+
+
 ## summary vmt model ##
 1. View: a function that handle the http request, interacts with the model and send a response http, usually rendered with a template
 
